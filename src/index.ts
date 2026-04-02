@@ -3,6 +3,7 @@ import { NETWORK_URL } from "./config.js";
 import { setupAccounts } from "./01-setup-accounts.js";
 import { setupCredentials } from "./02-credentials.js";
 import { setupDomain } from "./03-domain.js";
+import { setupTrustlines } from "./04-trustlines.js";
 
 async function main() {
   const client = new Client(NETWORK_URL);
@@ -38,6 +39,16 @@ async function main() {
       wallets.credentialIssuer,
     );
     console.log(`DomainID: ${domainId}`);
+
+    // Phase 5 — Trustlines & IOU funding
+    console.log("\n=== Trustlines & IOU Funding ===");
+    await setupTrustlines(
+      client,
+      wallets.rlusdIssuer,
+      wallets.eurofIssuer,
+      wallets.sender,
+      wallets.mm,
+    );
   } finally {
     await client.disconnect();
     console.log("\nDisconnected");
