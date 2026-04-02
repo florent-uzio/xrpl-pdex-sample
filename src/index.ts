@@ -1,6 +1,7 @@
 import { Client } from "xrpl";
 import { NETWORK_URL } from "./config.js";
 import { setupAccounts } from "./01-setup-accounts.js";
+import { setupCredentials } from "./02-credentials.js";
 
 async function main() {
   const client = new Client(NETWORK_URL);
@@ -18,6 +19,15 @@ async function main() {
     console.log(`Domain Issuer     : ${wallets.domainIssuer.address}`);
     console.log(`RLUSD Issuer      : ${wallets.rlusdIssuer.address}`);
     console.log(`EUROF Issuer      : ${wallets.eurofIssuer.address}`);
+
+    // Phase 3 — Credential lifecycle
+    console.log("\n=== Credentials ===");
+    await setupCredentials(
+      client,
+      wallets.credentialIssuer,
+      wallets.sender,
+      wallets.mm,
+    );
   } finally {
     await client.disconnect();
     console.log("\nDisconnected");
