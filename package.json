@@ -1,0 +1,17 @@
+{
+  "name": "xrpl-pdex-sample",
+  "version": "1.0.0",
+  "description": "XRPL Permissioned DEX trading flow sample",
+  "main": "src/index.ts",
+  "scripts": {
+    "start": "tsx src/index.ts"
+  },
+  "dependencies": {
+    "xrpl": "^4.2.0"
+  },
+  "devDependencies": {
+    "@types/node": "^25.5.0",
+    "tsx": "^4.19.0",
+    "typescript": "^5.7.0"
+  }
+}
