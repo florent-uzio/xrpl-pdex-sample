@@ -2,6 +2,7 @@ import { Client } from "xrpl";
 import { NETWORK_URL } from "./config.js";
 import { setupAccounts } from "./01-setup-accounts.js";
 import { setupCredentials } from "./02-credentials.js";
+import { setupDomain } from "./03-domain.js";
 
 async function main() {
   const client = new Client(NETWORK_URL);
@@ -28,6 +29,15 @@ async function main() {
       wallets.sender,
       wallets.mm,
     );
+
+    // Phase 4 — Permissioned domain
+    console.log("\n=== Permissioned Domain ===");
+    const domainId = await setupDomain(
+      client,
+      wallets.domainIssuer,
+      wallets.credentialIssuer,
+    );
+    console.log(`DomainID: ${domainId}`);
   } finally {
     await client.disconnect();
     console.log("\nDisconnected");
