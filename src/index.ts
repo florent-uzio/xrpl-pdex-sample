@@ -4,6 +4,7 @@ import { setupAccounts } from "./01-setup-accounts.js";
 import { setupCredentials } from "./02-credentials.js";
 import { setupDomain } from "./03-domain.js";
 import { setupTrustlines } from "./04-trustlines.js";
+import { setupMMOffers } from "./05-mm-offers.js";
 
 async function main() {
   const client = new Client(NETWORK_URL);
@@ -48,6 +49,15 @@ async function main() {
       wallets.eurofIssuer,
       wallets.sender,
       wallets.mm,
+    );
+    // Phase 6 — Market Maker order book
+    console.log("\n=== Market Maker Offers ===");
+    await setupMMOffers(
+      client,
+      wallets.mm,
+      wallets.eurofIssuer,
+      wallets.rlusdIssuer,
+      domainId,
     );
   } finally {
     await client.disconnect();
